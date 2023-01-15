@@ -1,4 +1,4 @@
-#TP 4 : Docker Engine, Jenkins, CI/CD - Yassine LAMBARKI
+# TP 4 : Docker Engine, Jenkins, CI/CD - Yassine LAMBARKI
 
 ### Partie 1: CI
 
@@ -75,6 +75,85 @@
 ![job1tp4 Jenkins](/images/mot%20de%20passe.jpg)
 
 ![job1tp4 Jenkins](/images/screencapture-localhost-8079-job-job1tp4-configure-2023-01-15-10_55_23.png)
+
+
+![job1tp4 Jenkins](/images/screencapture-localhost-8079-manage-configure-2023-01-15-21_09_03%20(1).png)
+
+
+![Tp4 dockerhub](/images/tp4%20docker%20hub.jpg)
+
+
+
+#### 7. Faire un changement dans index.html, découvrir les changements sur le job1tp4.
+
+![job1tp4](/images/tp1.png)
+
+
+### Partie 2: CI/CD (continuous delivery/continuous deployment)
+
+#### 1. Créer un autre job freestyle job2tp4 contenant les mêmes instructions du job1tp4 de la première partie tout en ajoutant un script Shell qui déploie l’image sous un nouveau conteneur sur docker engine.
+
+
+![job2tp4](/images/tp2-4.png)
+
+#### 2. Faire un changement dans index.html, découvrir les changements sur le job2tp4 et sur l’image déployé. Enregistrer les changements dans le répertoire avec la commande git commit -m “tp4 v3” Pusher le code vers le répertoire GitHub avec la commande git push origin master D’après les changements Déclenchement automatique du build sur Jenkins
+
+![job2tp4](/images/tp2.png)
+
+#### 3. Créer un job du type pipeline job2tp4v2 (qui reprend les mêmes tâches du job freestyle job2tp4 mais d’une autre manière), ajouter sans rien changer dans les paramètres du job, un script dans la partie script du pipeline assurant les trois stages (Cloning Git, Building image, Publish Image).
+
+![job2tp4](/images/build%20success%20automatique.jpg)
+
+![job2tp4](/images/pipeline.jpg)
+
+![job2tp4](/images/screencapture-localhost-8079-job-job2tp4v2-2023-01-15-22_30_25.png)
+
+
+`````
+pipeline {
+  environment {
+    registry = "softengyas/tp4devops"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/softengyas/tp4'
+      }
+    }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    stage('Publish Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+  }
+}
+
+
+`````
+
+![job2tp4](/images/jenkins%20file.jpg)
+
+![job2tp4](/images/screencapture-localhost-8079-job-job2tp4v2-2023-01-15-22_30_25.png)
+
+![job2tp4](/images/jenkins%204eme.jpg)
+
+
+
+
 
 
 
