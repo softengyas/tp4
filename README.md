@@ -224,6 +224,66 @@ stage('Test image') {
 
 
 
+##### 6. Modifier le pipeline. Ce dernier contiendra cinq Stages (Cloning Git, Building image, Test image, Publish Image, deploy image). Ajouter sur le fichier jenkinsfile un stage du déploiement de l’image vers docker engine. Tester le changement via le stage view.
+
+
+
+![job4tp4](/images/deploy.jpg)
+
+![job4tp4](/images/deploy2.png)
+
+
+`````
+pipeline {
+  environment {
+    registry = "softengyas/tp4devops"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/softengyas/tp4'
+      }
+    }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+stage('Test image') {
+        steps{
+        script {
+                    echo "Tests passed"
+        }
+      }
+    }
+    stage('Publish Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+        stage('Deploy image') {
+      steps{
+        bat "docker run -d $registry:$BUILD_NUMBER"
+      }
+    }
+  }
+}
+
+
+`````
+
+
+
+
 
 
 
