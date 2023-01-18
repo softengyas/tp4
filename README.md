@@ -169,6 +169,9 @@ pipeline {
 
 ![job3tp4](/images/scm%20jenkins.png)
 
+
+##### 5- Afficher stage view après quelques changements dans le projet (par exemple sur index.html). Enregistrer les changements dans le répertoire avec la commande git commit -m “tp4 v3” Pusher le code vers le répertoire GitHub avec la commande git push origin master D’après les changementsDéclenchement automatique du build sur Jenkins
+
 ![job3tp4](/images/scm%20push.png)
 
 ![job3tp4](/images/ECLIPSE%20SCM.jpg)
@@ -231,6 +234,14 @@ stage('Test image') {
 ![job4tp4](/images/deploy.jpg)
 
 ![job4tp4](/images/deploy2.png)
+
+![job4tp4](/images/deploy%20finish.png)
+
+![job4tp4](/images/jenkins%20finish.png)
+
+![job4tp4](/images/docker%20finish.png)
+
+
 
 
 `````
