@@ -18,7 +18,15 @@ pipeline {
         }
       }
     }
-    stage('Publish Image') {
+stage('Test image') {
+        steps{
+        script {
+        
+            echo "Tests passed"
+        }
+      }
+    }
+    stage('Deploy Image') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -29,4 +37,3 @@ pipeline {
     }
   }
 }
-

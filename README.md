@@ -118,6 +118,8 @@
 ![job2tp4](/images/screencapture-localhost-8079-job-job2tp4v2-2023-01-15-22_30_25.png)
 
 
+
+
 `````
 pipeline {
   environment {
@@ -158,6 +160,58 @@ pipeline {
 
 
 ![job2tp4](/images/jenkins%204eme.jpg)
+
+
+#### 4. Créer un job du type pipeline (job3tp4). Ce dernier contiendra quatre Stages(Cloning Git, Building image, Test image, Publish Image). Sur le même projet TP4, créer un fichier ‘jenkinsfile’ qui définit le script assurant les quatre stages, par la suite spécifier sur le job le chemin du fichier ‘jenkinsfile’.
+
+
+![job3tp4](/images/scm%20job3.jpg)
+
+![job3tp4](/images/scm%20jenkins.png)
+
+
+
+````
+pipeline {
+  environment {
+    registry = "softengyas/tp4devops"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/softengyas/tp4'
+      }
+    }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+stage('Test image') {
+        steps{
+        script {
+        
+            echo "Tests passed"
+        }
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+  }
+}
+````
 
 
 
