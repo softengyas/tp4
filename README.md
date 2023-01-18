@@ -169,6 +169,8 @@ pipeline {
 
 ![job3tp4](/images/scm%20jenkins.png)
 
+![job3tp4](/images/scm%20push.png)
+
 
 
 ````
