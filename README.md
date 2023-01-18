@@ -102,6 +102,14 @@
 
 #### 3. Créer un job du type pipeline job2tp4v2 (qui reprend les mêmes tâches du job freestyle job2tp4 mais d’une autre manière), ajouter sans rien changer dans les paramètres du job, un script dans la partie script du pipeline assurant les trois stages (Cloning Git, Building image, Publish Image).
 
+
+![job2tp4](/images/tpscript2.png)
+
+
+![job2tp4](/images/tp%20pour%20script.jpg)
+
+
+
 ![job2tp4](/images/build%20success%20automatique.jpg)
 
 ![job2tp4](/images/pipeline.jpg)
