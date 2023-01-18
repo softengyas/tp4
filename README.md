@@ -171,6 +171,12 @@ pipeline {
 
 ![job3tp4](/images/scm%20push.png)
 
+![job3tp4](/images/ECLIPSE%20SCM.jpg)
+
+![job3tp4](/images/DOCKER%20SCM.png)
+
+![job3tp4](/images/JENKINS%20SCM.jpg)
+
 
 
 ````
